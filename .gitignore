@@ -104,3 +104,4 @@ venv.bak/
 .mypy_cache/
 .DS_Store
 FLAG-bXlyZXBvc2l0b3J5dG9maW5kZmxhZ3M
+src/angr/.idea/*
