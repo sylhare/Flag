@@ -12,5 +12,3 @@ logger = logging.getLogger('angr')
 logger.propagate = True  # Propagate to console
 logger.disabled = False  # Is Enable
 logger.setLevel(logging.WARNING)  # Will show logs starting at warning level (default)
-
-

@@ -3,7 +3,6 @@ https://docs.angr.io/core-concepts/toplevel
 """
 import angr
 import logging
-
 logging.getLogger('cle').setLevel('ERROR')
 
 # Create Angr project
@@ -19,7 +18,16 @@ print(hex(proj.entry))  # entry is the entry point of the binary
 print(proj.filename)  # is the absolute filename of the binary
 
 # Loader
-print(proj.loader)
+print(proj.loader)  # Loader which has the virtual space address of the binary
+print(proj.loader.shared_objects)
+print(hex(proj.loader.min_addr))
+print(hex(proj.loader.max_addr))
+
+print(proj.loader.main_object)  # we've loaded several binaries into this project. Here's the main one!
+print(proj.loader.main_object.execstack)  # Does this binary have an executable stack?
+print(proj.loader.main_object.pic)  # Is this binary position-independent?
+
+
 
 if __name__ == '__main__':
     pass
