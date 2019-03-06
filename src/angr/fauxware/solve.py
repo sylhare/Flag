@@ -7,13 +7,6 @@ import angr
 import sys
 
 
-# Look at fauxware.c! This is the source code for a "faux firmware" (@zardus
-# really likes the puns) that's meant to be a simple representation of a
-# firmware that can authenticate users but also has a backdoor - the backdoor
-# is that anybody who provides the string "SOSNEAKY" as their password will be
-# automatically authenticated.
-
-
 def basic_symbolic_execution():
     # We can use this as a basic demonstration of using angr for symbolic
     # execution. First, we load the binary into an angr project.
@@ -78,8 +71,7 @@ def basic_symbolic_execution():
 
 
 if __name__ == '__main__':
-    print(basic_symbolic_execution())
     sys.stdout.buffer.write(basic_symbolic_execution())
 
 # You should be able to run this script and pipe its output to fauxware and
-# fauxware will authenticate you.
+# fauxware will authenticate you, see Readme.md.
