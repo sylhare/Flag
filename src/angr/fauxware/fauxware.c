@@ -26,6 +26,7 @@ int authenticate(char *username, char *password)
 int accepted()
 {
 	printf("Welcome to the admin console, trusted user!\n");
+	return 0; // Added to recompile
 }
 
 int rejected()
