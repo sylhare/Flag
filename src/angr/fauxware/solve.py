@@ -1,6 +1,11 @@
 #!/usr/bin/env python
+"""
+Source https://github.com/angr/angr-doc/tree/master/examples/fauxware
+"""
 
 import angr
+import sys
+
 
 # Look at fauxware.c! This is the source code for a "faux firmware" (@zardus
 # really likes the puns) that's meant to be a simple representation of a
@@ -13,7 +18,7 @@ def basic_symbolic_execution():
     # We can use this as a basic demonstration of using angr for symbolic
     # execution. First, we load the binary into an angr project.
 
-    p = angr.Project('fauxware')
+    p = angr.Project('./test/fauxware_example')
 
     # Now, we want to construct a representation of symbolic program state.
     # SimState objects are what angr manipulates when it symbolically executes
@@ -45,7 +50,7 @@ def basic_symbolic_execution():
     # Now, we begin execution. This will symbolically execute the program until
     # we reach a branch statement for which both branches are satisfiable.
 
-    sm.step(until=lambda lpg: len(lpg.active) > 1)
+    sm.run(until=lambda sm_: len(sm_.active) > 1)
 
     # If you look at the C code, you see that the first "if" statement that the
     # program can come across is comparing the result of the strcmp with the
@@ -66,16 +71,15 @@ def basic_symbolic_execution():
     # quick and dirty concretization of the content in file descriptor zero,
     # stdin. One of these strings should contain the substring "SOSNEAKY"!
 
-    if 'SOSNEAKY' in input_0:
+    if b'SOSNEAKY' in input_0:
         return input_0
     else:
         return input_1
 
-def test():
-    pass        # appease our CI infrastructure which expects this file to do something lmao
 
 if __name__ == '__main__':
     print(basic_symbolic_execution())
+    sys.stdout.buffer.write(basic_symbolic_execution())
 
-# You should be able to run this program and pipe its into fauxware in order to
-# produce a "sucessfully authenticated" message
+# You should be able to run this script and pipe its output to fauxware and
+# fauxware will authenticate you.
