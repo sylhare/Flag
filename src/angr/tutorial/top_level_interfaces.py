@@ -58,5 +58,13 @@ state.mem[0x1000].long = 4                  # and memory (.long for the <type> t
 print(state.mem[0x1000].long.resolved)      # .resolved to get the value as a bitvector
 print(state.mem[0x1000].long.concrete)      # .concrete to get the value as a python int
 
+# Simulation Managers
+print("\n\n Simulation Managers:\n")
+simgr = proj.factory.simulation_manager(state)
+print(simgr.active)                         # A simulation manager is the primary interface in angr for performing execution, simulation, whatever you want to call it, with states
+simgr.step()                                # Make some execution
+print(simgr.active)
+print(simgr.active[0].regs.rip)             # To get the first state in the simulation
+print(state.regs.rip)                       # Still the same as before the step
 if __name__ == '__main__':
     pass
