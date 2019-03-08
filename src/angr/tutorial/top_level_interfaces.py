@@ -5,6 +5,7 @@ import angr
 import logging
 
 logging.getLogger('cle').setLevel('ERROR')
+logging.getLogger('angr').setLevel('ERROR')
 
 # Create Angr project
 proj = angr.Project('./bin/true')
@@ -66,5 +67,18 @@ simgr.step()                                # Make some execution
 print(simgr.active)
 print(simgr.active[0].regs.rip)             # To get the first state in the simulation
 print(state.regs.rip)                       # Still the same as before the step
+
+
+# Analyses
+print("\n\n Analyses:\n")                                   # angr comes pre-packaged with several built-in analyses that you can use to extract some fun kinds of information from a program
+print(proj.analyses)                                        # Press `.` to see all analyses possible
+proj = angr.Project('./bin/true', auto_load_libs=False)     # Originally, when we loaded this binary it also loaded all its dependencies into the same virtual address space
+cfg = proj.analyses.CFGFast()                               # This is undesirable for most analysis.
+print(cfg)
+print(len(cfg.graph.nodes()))
+entry_node = cfg.get_any_node(proj.entry)
+print(entry_node)                                           # To get the CFGNode for a given address, use cfg.get_any_node
+print(len(list(cfg.graph.successors(entry_node))))
+
 if __name__ == '__main__':
     pass
