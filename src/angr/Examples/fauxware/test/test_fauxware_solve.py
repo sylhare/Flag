@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from fauxware.solve import basic_symbolic_execution
+from Examples.fauxware import basic_symbolic_execution
 
 
 def test():

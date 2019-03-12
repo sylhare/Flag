@@ -105,3 +105,4 @@ venv.bak/
 .DS_Store
 FLAG-bXlyZXBvc2l0b3J5dG9maW5kZmxhZ3M
 src/angr/.idea/*
+src/angr/radare2/radare2/
