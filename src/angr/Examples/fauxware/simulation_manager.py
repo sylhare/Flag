@@ -2,7 +2,7 @@ import angr
 
 
 def main():
-    proj = angr.Project('./test/fauxware_example', auto_load_libs=False)
+    proj = angr.Project('./test/fauxware', auto_load_libs=False)
     state = proj.factory.entry_state()
     simgr = proj.factory.simgr(state)
 

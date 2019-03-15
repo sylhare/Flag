@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Source https://github.com/angr/angr-doc/tree/master/examples/fauxware
+Source https://github.com/angr/angr-doc/tree/master/examples/fauxware_mac
 """
 
 import angr
@@ -11,7 +11,7 @@ def basic_symbolic_execution():
     # We can use this as a basic demonstration of using angr for symbolic
     # execution. First, we load the binary into an angr project.
 
-    p = angr.Project('./test/fauxware_example')
+    p = angr.Project('./test/fauxware')
 
     # Now, we want to construct a representation of symbolic program state.
     # SimState objects are what angr manipulates when it symbolically executes
@@ -73,5 +73,5 @@ def basic_symbolic_execution():
 if __name__ == '__main__':
     sys.stdout.buffer.write(basic_symbolic_execution())
 
-# You should be able to run this script and pipe its output to fauxware and
-# fauxware will authenticate you, see Readme.md.
+# You should be able to run this script and pipe its output to fauxware_mac and
+# fauxware_mac will authenticate you, see Readme.md.
