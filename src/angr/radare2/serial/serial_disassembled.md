@@ -1,3 +1,8 @@
+## Serial
+
+Disassemble source of `serial` with radare2.
+
+```assembly
 / (fcn) main 1050
 |   int main (int argc, char **argv, char **envp);
 |           ; var char *s @ rbp-0x200
@@ -347,3 +352,4 @@
 |           ;-- fcn.00400d58:
             ;-- section..fini:
             ;-- .fini:
+```
