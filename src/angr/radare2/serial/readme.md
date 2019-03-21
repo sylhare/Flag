@@ -35,7 +35,7 @@ while being a total beginner.
 - [grazfather](http://grazfather.github.io/ctf/re/2016/02/07/Sharif-CTF-RE150-Serial-Writeup.html)
 - [0x90r00t](https://0x90r00t.com/2016/02/07/sharif-university-ctf-2016-reverse-150-serial-write-up/)
 - [Michael Bann](https://bannsecurity.com/index.php/home/10-ctf-writeups/29-sharif-university-ctf-2016-serial)
-
+- [Aldeid](https://www.aldeid.com/wiki/SharifCTF-2016/serial)
 
 ### References
 
@@ -74,9 +74,13 @@ Ascii tables with hexadecimal and char values:
 
 ## Analysis
 
+First we need to analyse with `aaa` with radare2.
+
+### Radare2
+
 That the time where we look at the disassembled main to understand what is happening.
 Radare2 is very good at deciphering through the assembly instructions, 
-you can have a look into `serial_disassembled.txt`.
+you can have a look into `serial_disassembled.md` (We can view the disassembled view with `pdf @ main`) 
 
 We can deduce that the variable s `rbp-0x200` is the entered input here. 
 Shortly after that we can see that its length is checked `strlen`, the serial number should be 16 `0x10`.
@@ -149,7 +153,35 @@ So we can go on till the end we would find:
 To sum up we should have these constraints:
 - The length of the input must be 16
 - str[0] = E
-- 
+- str[15] = V
+- str[1] = Z
+- str[14] = A
+- str[2] = 9
+- ... 
+- str[7] = c
+- str[8] = 8
 
+Which leads to the end at `EZ9dmq4c8g9G7bAV`
+
+### Angr
+
+With angr, what we want to achieve is arriving at the state where the serial number input is valid.
+So in radare2 we can do `iz` which will give us the strings and their data location:
+
+```assembly
+[0x00400890]> iz
+[Strings]
+Num Paddr      Vaddr      Len Size Section  Type  String
+000 0x00000dac 0x00400dac  28  29 (.rodata) ascii Please Enter the valid key!\n
+001 0x00000dc9 0x00400dc9  26  27 (.rodata) ascii Serial number is valid :)\n
+002 0x00000de4 0x00400de4  28  29 (.rodata) ascii Serial number is not valid!\n
+```
+
+Here we want to explore the binary until we arrive at `Serial number is valid :)\n` which is at the instruction line `0x00400c5c` (different from the data address).
+
+```assembly
+|      `--> 0x00400c5c      bec90d4000     mov esi, str.Serial_number_is_valid_: ; 0x400dc9 ; "Serial number is valid :)\n"
+|           0x00400c61      bfe0136000     mov edi, obj.std::cout      ; 0x6013e0
+```
  
 
