@@ -15,7 +15,7 @@ def main():
 
     state = proj.factory.blank_state(addr=0x100000ea4)
     simgr = proj.factory.simulation_manager(state)
-    simgr.explore(find=(0x100000f30))
+    simgr.explore(find=0x100000f30)
 
     solution_state = simgr.found[0]
     print(print(solution_state.posix.dumps(0)))

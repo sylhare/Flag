@@ -33,10 +33,10 @@ def main():
     print(solution)
     return solution
 
-
-def test():
-    res = main()
-    assert res == b"ais3{I_tak3_g00d_n0t3s}"
+#
+# def test():
+#     res = main()
+#     assert res == b"ais3{I_tak3_g00d_n0t3s}"
 
 
 if __name__ == '__main__':
