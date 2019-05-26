@@ -110,3 +110,4 @@ src/decrypt/*
 .idea/*
 **/angr-workshop/**/index.html
 ctf/wite-up/*
+*.tar
