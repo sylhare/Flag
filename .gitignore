@@ -109,3 +109,4 @@ src/angr/radare2/radare2/
 src/decrypt/*
 .idea/*
 **/angr-workshop/**/index.html
+ctf/wite-up/*
