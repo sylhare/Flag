@@ -36,5 +36,14 @@ def main():
     print(simgr.mp_authenticated.posix.dumps(0))
 
 
+def simple():
+    proj = angr.Project('./test/fauxware', auto_load_libs=False)
+    state = proj.factory.entry_state()
+    simgr = proj.factory.simgr(state)
+    simgr.explore(find=lambda s: b'Welcome' in s.posix.dumps(1))
+    print(simgr.found[0].posix.dumps(0))
+
+
 if __name__ == '__main__':
-    main()
+    simple()
+    # main()

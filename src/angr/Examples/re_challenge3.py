@@ -3,15 +3,13 @@ import angr
 
 def main():
     proj = angr.Project('re_challenge3', load_options={"auto_load_libs": False})
-    simgr = proj.factory.simgr()
+    state = proj.factory.entry_state(addr=0x00400ec8)
+    simgr = proj.factory.simgr(state)
 
-    simgr.explore(find=lambda state: b"Good boy!" in state.posix.dumps(1),
-                  avoid=lambda state: b"Invalid flag!!" in state.posix.dumps(1))
-    s = simgr.found[0]
+    simgr.explore(find=lambda s: b"Good boy!" in s.posix.dumps(1),
+                  avoid=lambda s: b"Invalid flag!!" in s.posix.dumps(1))
 
-    print(s.posix.dumps(1))
-    flag = s.posix.dumps(0).split(b'\0')[0]
-    print(flag)
+    print(simgr.found[0].posix.dumps(0))
 
 
 if __name__ == '__main__':
