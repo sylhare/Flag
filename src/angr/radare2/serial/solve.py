@@ -12,14 +12,21 @@ flag: EZ9dmq4c8g9G7bAV
 
 
 def main():
-    proj = angr.Project("./serial")
-    state = proj.factory.blank_state(addr=0x400A3C)
+    project = angr.Project("./serial")
+    state = project.factory.blank_state(addr=0x400A3C)
 
-    simgr = proj.factory.simgr(state)
-    simgr.explore(find=0x00400c5c, avoid=0x00400c84)
+    simulation = project.factory.simgr(state)
+    simulation.explore(find=0x400C5C)
 
-    print(simgr.found[0].posix.dumps(0))  # Print the found from the stash
+    solution_state = simulation.found[0]
+    # pointer for registry rbp-0x200 where the password is saved
+    pointer = solution_state.regs.rbp-0x200
+    # content is a bit vector of size 16
+    state_bit_vector = solution_state.memory.load(pointer, 16)
+    # return the eval bit vector to data
+    return solution_state.solver.eval(state_bit_vector, cast_to=bytes)
 
 
 if __name__ == "__main__":
-    main()
+    print(main())
+    # >> b'EZ9dmq4c8g9G7bAV'
