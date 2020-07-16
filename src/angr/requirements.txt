@@ -1,5 +1,8 @@
+claripy
+graphviz
 #unicorn #installed with python2
 # CC=/usr/local/bin/gcc-8 UNICORN_QEMU_FLAGS="--python=/usr/bin/python" pip install unicorn
 angr
 pytest
 monkeyhex
+pygments
