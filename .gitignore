@@ -111,3 +111,5 @@ src/decrypt/*
 **/angr-workshop/**/index.html
 ctf/wite-up/*
 *.tar
+src/angr/radare2/serial/test_angr/*
+src/angr/tutorial/angr-workshop/angr-cli-master/*
