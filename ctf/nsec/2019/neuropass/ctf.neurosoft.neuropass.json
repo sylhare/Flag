@@ -1,0 +1,9 @@
+{
+  "name": "ctf.neurosoft.neuropass",
+  "description": "The one password manager you need for you life",
+  "path": "/opt/neurosoft/neuropass",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://fhbhinloffnbpciglfhgeaenlonbemih/"
+  ]
+}
