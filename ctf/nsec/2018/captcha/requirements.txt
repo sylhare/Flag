@@ -1,0 +1,11 @@
+requests
+opencv-python
+ipython
+numpy
+pytesseract
+Crypto
+scipy
+beautifulsoup4
+pillow >= 2.0.0
+captcha
+captcha-solver
